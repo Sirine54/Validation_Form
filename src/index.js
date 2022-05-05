@@ -13,22 +13,14 @@ const confirmPass = document.getElementById('confirmPass');
 const show = document.getElementById('show');
 const hide = document.getElementById('hide');
 
-const inputData = document.querySelectorAll('[data-input]')
 
 
 const btnSub= document.getElementById('submit')
 
 
 
-/////////////// Test password ////////////////////
+/////////////// clear All ////////////////////
 
-
-// function testPass(){
-//     if( password.value !== confirmPass.value )
-//     {
-//         alert("password not identical")
-//     }
-// }
 
 function clearAll(){
     userName.value=''
@@ -37,18 +29,27 @@ function clearAll(){
     zip.value = ''
     password.value = ''
     confirmPass.value = ''
+
+    const formControl = input.parentElement;
+    const small = formControl.querySelector('small')
+
+    formControl.classList.remove('success')  //formControl.className ='control-form success'
+    formControl.classList.remove('error'); 
+    small.innerText=''
 }
 
-// 
 
 ///////////check Inputs///////////////
 
 btnSub.addEventListener('click',(e)=>{
     e.preventDefault();
-
-    checkInputs();
-   
+     checkInputs();
+  
+    
 });
+
+
+////////////////////////////////////////////////
 
 
 function checkInputs(){
@@ -82,11 +83,12 @@ function checkInputs(){
 
     if(passwordVal ===''){
         errorForm(password,'Password is required !!')
-        show.style.display='none'
         
-    }else if(passwordVal.length<=8){
+        
+    }else if(passwordVal.length < 8){
+        
         errorForm(password,'Password must be more than 8 digits')
-        show.style.display='none'
+        
     }
     else{
         successForm(password)
@@ -106,9 +108,17 @@ function checkInputs(){
     }else{
         successForm(country)
     }
- 
+
+    if(userNameVal!='' && emailVal!='' && country!=textCountry && zipVal!='' && passwordVal!='' && confirmVal!='' && passwordVal==confirmVal){
+        alert("registration done !!")
+      
+    }
+    
+  
 }
 
+
+///////////////Error Message///////////////////////// 
 
 
 function errorForm(input,message){
@@ -120,9 +130,16 @@ function errorForm(input,message){
     //formControl.className ='control-form error'
     formControl.classList.add('error');
     formControl.classList.remove('success')
+    show.style.right ="5px"
+    hide.style.right ="5px"
     
     shakeError()
 }
+
+
+
+///////////////Success inputs ///////////////////////////
+
 
 function successForm(input){
 
@@ -134,7 +151,12 @@ function successForm(input){
     small.innerText=''
     
     show.style.right ="5px"
+    hide.style.right ="5px"
 }
+
+
+////////////////Check email characters////////////////////
+
 
 function checkEmail(email){
     return `/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(${email})`;
@@ -142,18 +164,37 @@ function checkEmail(email){
 }
 
 
+///////////////////Add vibration when all error exist ///////////////////////
+
 function shakeError(){
-    container.classList.toggle("shake")
+    container.classList.add("shake")
 }
+
+
+///////////////////Show and Hide password //////////////////////////
 
 show.addEventListener('click',showPass)
 
 function showPass(){
   if (password.type === "password") {
     password.type = "text";
-    show.classList.remove('show')
-    hide.classList.add('hide')
-  } else {
-    password.type = "password";
+    show.classList.toggle('show')
+    hide.classList.toggle('hide')
+  } else{
+      hidePass()
   }
 }
+
+hide.addEventListener('click',hidePass)
+
+function hidePass(){
+    if(password.type="password"){
+        show.classList.remove('show')
+     hide.classList.toggle('hide')
+    }else{
+        showPass()
+    }
+}
+
+
+

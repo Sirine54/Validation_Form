@@ -119,18 +119,19 @@ input:focus,
 
 
 #show{
-  position: absolute;
-  right: 38px;
-  padding: 14px;
-  color: rgb(9, 9, 9);
-  transition: .4s all;
+position: absolute;
+right: 38px;
+padding: 14px;
+color: rgb(9, 9, 9);
+transition: .4s all;
 }
+
 
 .show{
    display: block !important;
-}
+} 
 .hide{
-    display: none !important;
+    display: block !important;
 }
 #hide{
     position: absolute;
@@ -138,11 +139,17 @@ input:focus,
     padding: 14px;
     color: rgb(9, 9, 9);
     transition: .4s all;
+    display: none;
+    
 }
-.show:hover,
+#show:hover,
         :focus {
     color: white;
 }
+#hide:hover,
+    :focus{
+        color: white; 
+    }
 
 button{
     height: 45px;
@@ -167,10 +174,10 @@ button:focus{
 }
 
 /*---------------Checking---------------------*/
-.control-form.success input{
+.control-form.success input,.control-form.success #country{
     border: 2px #2ecc71 solid;
 }
-.control-form.error input{
+.control-form.error input,.control-form.error #country{
     border: 2px #e74c3c solid;
 }
 .control-form.success i.fa-circle-check{
@@ -198,8 +205,9 @@ small{
     position: absolute;
     right: 4em;
     color: rgb(149, 34, 34);
-    padding-top: 40px;
+   transform: translateY(3.2em);
     visibility: hidden;
+   
 }
 .control-form.error small{
     visibility: visible;
