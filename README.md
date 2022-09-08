@@ -7,4 +7,4 @@
 // add functions 
 // finished and deploy it 
 
-#   https://symphonious-douhua-778507.netlify.app/
+#   https://registration-formapplication.netlify.app/
